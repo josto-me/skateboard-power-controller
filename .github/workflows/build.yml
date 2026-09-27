@@ -1,0 +1,18 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  attiny:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install avr-gcc
+        run: sudo apt-get update && sudo apt-get install -y gcc-avr avr-libc binutils-avr make
+      - name: Build v1 (ATtiny13, 9.6 MHz)
+        run: avr-g++ -mmcu=attiny13 -DF_CPU=9600000UL -Os -Wall -Wextra -o v1.elf firmware/v1/Skateboard_Power_V1.cpp && avr-size v1.elf
+      - name: Build v2 (ATtiny26, 8 MHz)
+        run: avr-g++ -mmcu=attiny26 -DF_CPU=8000000UL -Os -Wall -Wextra -o v2.elf firmware/v2/Skateboard_Power_V2.cpp && avr-size v2.elf

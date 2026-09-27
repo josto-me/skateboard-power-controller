@@ -1,0 +1,10 @@
+Debug/
+Release/
+__vm/
+Visual Micro/
+*.atsuo
+*.b#*
+*.s#*
+*.bak
+Thumbs.db
+~$*
